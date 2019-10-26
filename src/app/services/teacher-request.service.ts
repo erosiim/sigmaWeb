@@ -10,11 +10,11 @@ export class TeacherRequestService {
   constructor(private http: HttpClient) { }
 
   getTeachers(){
-    return this.http.get<Teacher[]>('http://localhost/backend-acto-protocolario/teachersapi.php');
+    return this.http.get<Teacher[]>('http://127.0.0.1:5000/vitalData');
   }
 
   addTeacher(data: Teacher){
-    return this.http.post('http://localhost/backend-acto-protocolario/teachersapi.php', data);
+    return this.http.post('http://127.0.0.1:5000/vitalData', data);
   }
 
   updateTeacher(id:string, teacher:Teacher){

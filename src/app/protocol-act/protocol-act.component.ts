@@ -97,21 +97,8 @@ export class ProtocolActComponent implements OnInit {
         return;
     }
 
-    let idx = this.selectedTeachers.findIndex(teacher => teacher.id === this.selectedTeacher.controlNumber);
 
-    this.selectedTeachers[updateIndex] = {
-      role: updateIndex === 0 ? 'Presidente' : updateIndex === 1 ? 'Secretario' : 'Vocal',
-      id: this.selectedTeacher.controlNumber,
-      teacher: this.selectedTeacher
-    };
 
-    if (idx !== -1 && idx !== updateIndex) {
-      this.selectedTeachers[idx] = {
-        role: idx === 0 ? 'Presidente' : idx === 1 ? 'Secretario' : 'Vocal',
-        id: null,
-        teacher: null
-      };
-    }
 
   }
   selectTeacher(teacher) {

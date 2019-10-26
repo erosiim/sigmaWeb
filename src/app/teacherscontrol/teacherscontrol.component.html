@@ -4,77 +4,42 @@
     <h2 class="text-center">Registro de Pacientes</h2>
     <br>
     <div class="row pr-4 pl-4">
-        <div class="col-md-8">
-            <div class="card">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th scope="col">No. Afiliación</th>
-                            <th scope="col">Nombre</th>
-                            <th scope="col">Apellido Paterno</th>
-                            <th scope="col">Apellido Materno</th>
-                            <th scope="col">Fecha de nacimiento</th>
-                            <th scope="col">Tipo de sangre</th>
-                            <th scope="col">Fecha de nacimiento</th>
-                        </tr>
-                    </thead>
-
-                    <tbody>
-                        <tr class="list-group-item-action" *ngFor="let teacher of teachers">
-                            <th scope="row">{{teacher.controlNumber}}</th>
-                            <td>{{teacher.name}}</td>
-                            <td>{{teacher.last_name_phater}}</td>
-                            <td>{{teacher.last_name_mother}}</td>
-                            <td>
-                                <button type="button" (click)="delete(teacher)"
-                                    class="btn btn-danger mx-2">Borrar</button>
-                                <button type="button" (click)="openForEdit(teacher)"
-                                    class="btn btn-info">Modificar</button>
-                            </td>
-
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
-        <div class="col-md-4">
+        <div class="col-md-3">
             <div class="card">
                 <div class="card-body center">
                     <h3 class="text-center">Datos del paciente</h3>
                     <form [formGroup]="teacherFormGroup">
                         <p>
                             <mat-form-field>
-                                <input formControlName="controlNumber" matInput placeholder="N° Afiliación" required>
+                                <input formControlName="noAfiliacion" matInput placeholder="N° Afiliación" required>
                             </mat-form-field>
                         </p>
                         <p>
                             <mat-form-field>
-                                <input formControlName="name" matInput placeholder="Nombre(s)" required>
+                                <input formControlName="nombre" matInput placeholder="Nombre(s)" required>
                             </mat-form-field>
                         </p>
                         <p>
                             <mat-form-field>
-                                <input formControlName="last_name_phater" matInput placeholder="Apellido Paterno"
+                                <input formControlName="aPaterno" matInput placeholder="Apellido Paterno"
                                     required>
                             </mat-form-field>
                         </p>
                         <p>
                             <mat-form-field>
-                                <input formControlName="last_name_mother" matInput placeholder="Apellido Materno"
+                                <input formControlName="aMaterno" matInput placeholder="Apellido Materno"
                                     required>
                             </mat-form-field>
                         </p>
                         <p>
                             <mat-form-field>
-                                <input formControlName="born_date" matInput placeholder="Fecha de nacimiento"
-                                    required>
+                                <input formControlName="fechaNa" matInput placeholder="Fecha de nacimiento" required>
                             </mat-form-field>
                         </p>
                         <p>
                             <mat-form-field>
                                 <mat-label>Tipo de sangre</mat-label>
-                                <mat-select formControlName="title">
+                                <mat-select formControlName="tipoSangre">
                                     <mat-option value="A">A</mat-option>
                                     <mat-option value="B">B</mat-option>
                                     <mat-option value="AB">AB</mat-option>
@@ -92,19 +57,18 @@
                         </p>
                         <p>
                             <mat-form-field>
-                                <input formControlName="sicknesses" matInput placeholder="Enfermedades"
-                                    required>
+                                <input formControlName="enfermedades" matInput placeholder="Enfermedades" required>
                             </mat-form-field>
                         </p>
                         <p>
                             <mat-form-field>
-                                <input formControlName="alergic" matInput placeholder="Alergias"
+                                <input formControlName="alergias" matInput placeholder="Alergias a medicamentos"
                                     required>
                             </mat-form-field>
                         </p>
 
                         <p>
-                            <button [disabled]="!teacherFormGroup.valid" type="button" (click)="saveOrEdit()"
+                            <button  type="button" (click)="saveOrEdit()"
                                 class="btn btn-success">Save</button>
                             <button type="button" (click)="clear()" class="btn btn-outline-info ml-2">Clear</button>
                         </p>
@@ -112,6 +76,39 @@
                 </div>
             </div>
         </div>
+        <div class="col-md-8">
+            <div class="card">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">No. Afiliación</th>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Apellido Paterno</th>
+                            <th scope="col">Apellido Materno</th>
+                            <th scope="col">Fecha de nacimiento</th>
+                            <th scope="col">Tipo de sangre</th>
+                            <th scope="col">Enfermedades</th>
+                            <th scope="col">Alergias</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr class="list-group-item-action" *ngFor="let teacher of teachers">
+                            <th scope="row">{{teacher.noAfiliacion}}</th>
+                            <td>{{teacher.nombre}}</td>
+                            <td>{{teacher.aPaterno}}</td>
+                            <td>{{teacher.aMaterno}}</td>
+                            <td>{{teacher.fechaNa}}</td>
+                            <td>{{teacher.tipoSangre}}</td>
+                            <td>{{teacher.enfermedades}}</td>
+                            <td>{{teacher.alergias}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+
     </div>
 
 

@@ -12,10 +12,10 @@ import {Teacher} from '../models/teacher';
 export class TeacherscontrolComponent implements OnInit {
 
   teacherFormGroup:  FormGroup;
-  constructor(private navBarService: NavbarService, 
+  constructor(private navBarService: NavbarService,
     private _formBuilder: FormBuilder,
     private teacherService:TeacherRequestService) { }
-  teachers: Teacher[] = [];
+  teachers: Teacher[];
   teacherSelected = null;
 
   ngOnInit() {
@@ -23,11 +23,14 @@ export class TeacherscontrolComponent implements OnInit {
     this.navBarService.isAdmin();
     this.updateTable();
     let teacherControlBuilder = {
-      controlNumber: ['', Validators.required],
-      name: ['', Validators.required],
-      last_name_phater: ['', Validators.required],
-      last_name_mother: ['', Validators.required],
-      title: ['', Validators.required]
+      noAfiliacion: ['', Validators.required],
+      nombre: ['', Validators.required],
+      aPaterno: ['', Validators.required],
+      aMaterno: ['', Validators.required],
+      fechaNa: ['', Validators.required],
+      tipoSangre: ['', Validators.required],
+      enfermedades: ['', Validators.required],
+      alergias: ['', Validators.required]
     };
 
     this.teacherFormGroup = this._formBuilder.group(teacherControlBuilder);
@@ -37,17 +40,12 @@ export class TeacherscontrolComponent implements OnInit {
   private updateTable(){
     this.teacherService.getTeachers().subscribe( (data: Teacher[]) =>{
       this.teachers = data;
+      console.log(data);
     });
   }
 
   delete(teacher: Teacher){
-    this.teacherService.deleteTeacher(teacher.controlNumber).subscribe(
-      data=>{
-        this.updateTable();
-      }, error => {
-
-      }
-    )
+    
   }
 
   openForEdit(teacher){
