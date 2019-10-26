@@ -1,0 +1,25 @@
+<div class="container">
+    <form [formGroup]="configurationFormGroup">
+        <mat-form-field>
+            <input matInput placeholder="Número de Control (Texto)" required formControlName="controlNumber">
+        </mat-form-field>
+        <br>
+        <mat-form-field>
+            <input matInput [matDatepicker]="dp3" placeholder="Seleccione la fecha" disabled formControlName="date">
+            <mat-datepicker-toggle matSuffix [for]="dp3"></mat-datepicker-toggle>
+            <mat-datepicker #dp3 disabled="false"></mat-datepicker>
+        </mat-form-field>
+        <div class="row">
+            <div class="col-md-6 center">
+                <label for="startTime"> Hora de Inicio: </label>
+                <ngb-timepicker formControlName="startHour" id="startTime"></ngb-timepicker>
+            </div>
+            <div class="col-md-6 center">
+                <label for="finalTime"> Hora de Finalización: </label>
+                <ngb-timepicker formControlName="finalHour" id="finalTime"></ngb-timepicker>
+            </div>
+        </div>
+
+        <button type="button" (click) = "saveChanges($event)" class="btn btn-primary">Save changes</button>
+    </form>
+</div>

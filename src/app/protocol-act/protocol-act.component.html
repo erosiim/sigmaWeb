@@ -1,0 +1,278 @@
+<div class="container mt-4">
+    <!-- Modal STARTS -->
+    <div class="modal fade" id="selectionTeacherModal" tabindex="-1" role="dialog"
+        aria-labelledby="selectionTeacherModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="selectionTeacherModalLabel">Seleccione de puesto</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <mat-form-field>
+                        <mat-label>Puesto</mat-label>
+                        <mat-select matNativeControl required [(value)]="selectedRole">
+                            <mat-option>None</mat-option>
+                            <mat-option value="PRESIDENTE">Presidente</mat-option>
+                            <mat-option value="SECRETARIO">Secretario</mat-option>
+                            <mat-option value="VOCAL">Vocal</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <button type="button" (click)="setTeacherToRole()" class="btn btn-primary" data-dismiss="modal">Guardar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- MODAL ENDS -->
+    <mat-horizontal-stepper [linear]="isLinear" #stepper>
+
+        <mat-step [stepControl]="studentFormGroup">
+            <div class="container mt-4 p-3">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="container card-body">
+                                <h3 class="text-center">Datos del alumno</h3>
+                                <form [formGroup]="studentFormGroup">
+                                    <ng-template matStepLabel>Datos del alumno</ng-template>
+                                    <mat-form-field>
+                                        <input matInput placeholder="Nombre(s)" formControlName="namesCtrl" required>
+                                    </mat-form-field>
+                                    <br>
+                                    <mat-form-field>
+                                        <input matInput placeholder="Apellido paterno"
+                                            formControlName="firstLastNameCtrl" required>
+                                    </mat-form-field>
+                                    <br>
+                                    <mat-form-field>
+                                        <input matInput placeholder="Apellido materno"
+                                            formControlName="secondLastNameCtrl" required>
+                                    </mat-form-field>
+                                    <br>
+                                    <mat-form-field>
+                                        <mat-label>Programa educativo</mat-label>
+                                        <mat-select matNativeControl required formControlName="careerCtrl">
+                                            <mat-option>None</mat-option>
+                                            <mat-option value="Contaduría">Contaduría</mat-option>
+                                            <mat-option value="Administración">Administración</mat-option>
+                                            <mat-option value="Informática">Informática</mat-option>
+                                            <mat-option value="Ingeniería de Software">Ingeniería de Software
+                                            </mat-option>
+                                            <mat-option value="Sistemas computacionales Administrativos">Sistemas
+                                                computacionales administrativos
+                                            </mat-option>
+                                            <mat-option value="option6">Gestión y Dirección de Negocions
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="container card-body">
+                                <h3 class="text-center">Trabajo Recepcional</h3>
+                                <form [formGroup]="receptionalWorkFormGroup">
+                                    <mat-form-field>
+                                        <mat-label>Tipo</mat-label>
+                                        <mat-select formControlName="typeCtrl">
+                                            <mat-option value="Monografía">Monografía</mat-option>
+                                            <mat-option value="Tesina">Tesina</mat-option>
+                                            <mat-option value="Tesis">Tésis</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                    <br>
+                                    <mat-form-field>
+                                        <input formControlName="titleCtrl" matInput placeholder="Título" required>
+                                    </mat-form-field>
+
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <button mat-button matStepperNext>Next</button>
+                </div>
+            </div>
+        </mat-step>
+        <mat-step>
+            <ng-template matStepLabel>Datos del jurado</ng-template>
+
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8 mt-4">
+                        <h3 class="text-center">
+                            Selección de profesores
+                        </h3>
+
+                        <form class="mt-3">
+                            <mat-form-field class="searchInput">
+                                <input placeholder="Ingrese número de Control o Nombre o Apellido" type="text" matInput>
+                            </mat-form-field>
+                            <button class="btn btn-secondary ml-3">Buscar</button>
+                        </form>
+
+                        <table class="table mt-3">
+                            <thead>
+                                <tr>
+                                    <th scope="col">No. Control</th>
+                                    <th scope="col">Nombre</th>
+                                    <th scope="col">Apellido Paterno</th>
+                                    <th scope="col">Apellido Materno</th>
+                                    <th scope="col">Opciones</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <tr data-toggle="modal" data-target="#selectionTeacherModal"
+                                    (click)="selectTeacher(teacher)" class="list-group-item-action"
+                                    *ngFor="let teacher of teachers">
+                                    <th scope="row">{{teacher.controlNumber}}</th>
+                                    <td>{{teacher.name}}</td>
+                                    <td>{{teacher.last_name_phater}}</td>
+                                    <td>{{teacher.last_name_mother}}</td>
+                                    <td>
+                                        <button (click)="selectTeacher(teacher)" class="btn btn-success">
+                                            Seleccionar
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+                    <div class="col-md-4 mt-4">
+                        <h3 class="text-center">
+                            Profesores seleccionados
+                        </h3>
+                        <div *ngFor="let teacher of selectedTeachers" class="card mt-4">
+                            <div class="card-header">
+                                {{getName(teacher)}}
+                            </div>
+                            <div *ngIf="teacher.id != null;" class="card-body">
+                                <p><strong>Nombre: </strong>{{teacher.teacher.name}}
+                                    {{teacher.teacher.last_name_phater}} {{teacher.teacher.last_name_mother}}</p>
+                            </div>
+                        </div>
+
+                        <div class="mt-4 text-right">
+                            <button mat-button (click)="goBack(stepper)">REGRESAR</button>
+                            <button mat-button matStepperNext>SIGUIENTE</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </mat-step>
+        <mat-step>
+            <ng-template matStepLabel>Finalizar</ng-template>
+            <div id="contentToConvert" class="container-pdf">
+                <div class="pdf-top">
+                    <div class="pdf-left">
+                        <div class=pdf-logo>
+                            LOGO UV
+                        </div>
+                        <div class="pdf-photo"></div>
+                    </div>
+                    <div class="pdf-right">
+                        <div class="pdf-right-text">
+                            <strong>NÚMERO.- <u>CIENTO CINCUENTA</u></strong> EN LA CIUDAD DE IXTACZOQUITLÁN, ESTADO
+                            DE
+                            VERACRUZ LLAVE, SIENDO LAS <strong><u>10:00 HORAS DEL DÍA 29 DE MARZO DEL AÑO DOS MIL
+                                    DIECINUEVE,</u></strong> SE REÚNEN EN EL AUDITORIO
+                            DE LA FACULTAD DE CONTADURÍA Y ADMINISTRACIÓN DE ESTA CIUDAD, DEPENDIENTE DE LA
+                            UNIVERSIDAD
+                            VERACRUZANA, LOS ACADÉMICOS <strong><u>MTRA. ALEJANDRA RAMIREZ ZAVALETA M.A.F.O. CLAUDIA
+                                    GARCIA
+                                    SANTOS, DR. OSCAR YAHEVH CARRERA MORA,</u></strong> DESIGNADOS PARA INTEGRAR EL
+                            JURADO
+                            DEL EXAMEN PROFESIONAL DE LA CARRERA DE: <strong>LICENCIADO EN GESTION Y DIRECCION DE
+                                NEGOCIOS</strong> DEL (LA) ASPIRANTE A ESTE TÍTULO, CIUDADANO (A): <strong><u>ALAN
+                                    CAMARILLO
+                                    CARRASCO</u></strong> FUNGIENDO COMO PRESIDENTE, SECRETARIO Y VOCAL
+                            <strong><u>MTRA.
+                                    ALEJANDRA RAMIREZ ZAVALETA
+                                    M.A.F.O. CLAUDIA GARCIA SANTOS, DR. OSCAR YAHEVH CARRERA MORA</u></strong>
+                            RESPECTIVAMENTE, SE DIO INICIO AL ACTO DEL EXAMEN DE LA EXPERIENCIA EDUCATIVA
+                            EXPERIENCIA
+                            RECEPCIONAL PRESENTANDO SU MONOGRAFÍA INTITULADA: <strong><u>“EL RECURSO ANTE LAS NUEVAS
+                                    TECNOLOGIAS USADAS EN EL NEGOCIO.“</u></strong> CON LA RÉPLICA DE LOS SINODALES
+                            QUIENES
+                            LO INTERROGARON CADA UNO DE ELLOS Y RECOGIDA LA VOTACIÓN, EL SUSTENTANTE RESULTÓ
+                            <strong><u>APROBADO</u></strong> HABIENDO CUMPLIDO CON LOS
+                            REQUISITOS ESTABLECIDOS POR LA LEGISLACIÓN UNIVERSITARIA Y ESTE JURADO HACE LA
+                            DECLARATORIA
+                            DEL
+                            RESULTADO DEL EXAMEN PROFESIONAL, SE LEVANTA LA PRESENTE ACTA Y SE ENTREGA UNA AL
+                            SUSTENTANTE, A
+                            CONTINUACIÓN EL PRESIDENTE DEL JURADO
+                            PROCEDIÓ A TOMAR LA PROTESTA EN LOS SIGUIENTES TÉRMINOS: EL JURADO AQUÍ REUNIDO LO (A)
+                            HA
+                            CONSIDERADO DIGNO DE RECIBIR EL TÍTULO DE <strong><u>EN GESTION Y DIRECCION DE
+                                    NEGOCIOS</u></strong> QUE LO (A) HABILITARÁ PARA DESEMPEÑAR
+                            LA IMPORTANTE FUNCIÓN SOCIAL QUE ABARCA LA CARRERA EN EL EJERCICIO DE LA PROFESIÓN DE
+                            TAN
+                            ALTA
+                            RESPONSABILIDAD, TENGA USTED PRESENTE ANTE TODO QUE POR EL HECHO DE SERLO SE OBLIGA A
+                            INFORMAR
+                            DEBIDAMENTE, CON TODA VERDAD Y HONRADEZ,
+                            EN EL CASO QUE SEA LLAMADO A DESEMPEÑAR UN TRABAJO PROFESIONAL. NO OLVIDE USTED QUE
+                            QUIEN
+                            PONE
+                            EN SUS MANOS EL ESTUDIO DE CUALQUIER CASO, CONFÍA NO SOLO EN SU SABER SINO TAMBIÉN EN SU
+                            LEALTAD
+                            Y DISCRECIÓN, ESTIMANDO QUE SERÁ INCAPAZ
+                            DE ANTEPONER A SU INTERÉS LEGÍTIMO, EL SUYO PERSONAL O SUS PASIONES. RECORDADOS ASÍ SUS
+                            PRINCIPALES DEBERES QUE LE IMPONE EL TÍTULO QUE RECIBIRÁ USTED EN BREVE, SOLAMENTE LE
+                            FALTA
+                            PROMETER SU DEBIDO CUMPLIMIENTO, CIUDADANO (A)
+                            <strong><u>ALAN CAMARILLO
+                                    CARRASCO</u></strong> ¿PROTESTÁIS QUE EN EL EJERCICIO DE VUESTRA PROFESIÓN,
+                            PROCEDERÉIS
+                            SIEMPRE CON ESTRICTO APEGO A LAS NORMAS ÉTICAS Y PROCURAREIS DEJAR BIEN SENTADO EL
+                            PRESTIGIO
+                            DE
+                            LA FACULTAD DE CONTADURÍA
+                            Y ADMINISTRACIÓN DE IXTACZOQUITLÁN, VERACRUZ, QUE ESTÁ SEGURA DE VUESTRA PREPARACIÓN
+                            PROFESIONAL
+                            Y CONFÍA EN VUESTRA MORALIDAD Y HONRADEZ? EL INTERPELADO CONTESTO: <strong><u>SI
+                                    PROTESTO,</u></strong> Y EL PRESIDENTE DEL JURADO
+                            REPLICÓ: “SI NO ACTUAREIS ASÍ, QUE LA UNIVERSIDAD VERACRUZANA Y LA SOCIEDAD EN GENERAL
+                            OS LO
+                            DEMANDEN”, CON LO QUE SE DIO POR TERMINADO EL ACTO PROTOCOLARIO SIENDO LAS
+                            <strong><u>11:00</u></strong> HORAS DEL DÍA DE LA FECHA.
+                        </div>
+                        <div class="pdf-firm"><br>
+                            <span>PRESIDENTE</span><br>
+                            <span>________________________________________</span><br>
+                            <span>MTRA. ALEJANDRA RAMIREZ ZAVALETA</span>
+                        </div>
+                        <div class="container-firm">
+                            <div class="pdf-firm">
+                                <span>SECRETARIO</span><br>
+                                <span>____________________________</span><br>
+                                <span>M.A.F.O. CLAUDIA GARCIA SANTOS</span>
+                            </div>
+                            <div class="pdf-firm">
+                                <span>VOCAL</span><br>
+                                <span>___________________________</span><br>
+                                <span>DR. OSCAR YAHEVH CARRERA MORA</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <button mat-raised-button color="green" (click)="sendForm($event)">Generar</button>
+                <button mat-button (click)="stepper.reset()">Reset</button>
+            </div>
+        </mat-step>
+    </mat-horizontal-stepper>
+</div>
