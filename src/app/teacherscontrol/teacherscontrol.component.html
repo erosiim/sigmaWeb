@@ -11,7 +11,7 @@
                     <form [formGroup]="teacherFormGroup">
                         <p>
                             <mat-form-field>
-                                <input formControlName="noAfiliacion" matInput placeholder="N° Afiliación" required>
+                                <input formControlName="n_afiliacion" matInput placeholder="N° Afiliación" required>
                             </mat-form-field>
                         </p>
                         <p>
@@ -21,30 +21,18 @@
                         </p>
                         <p>
                             <mat-form-field>
-                                <input formControlName="nombre" matInput placeholder="Nombre(s)" required>
+                                <input formControlName="name" matInput placeholder="Nombre(s)" required>
                             </mat-form-field>
                         </p>
                         <p>
                             <mat-form-field>
-                                <input formControlName="aPaterno" matInput placeholder="Apellido Paterno"
-                                    required>
-                            </mat-form-field>
-                        </p>
-                        <p>
-                            <mat-form-field>
-                                <input formControlName="aMaterno" matInput placeholder="Apellido Materno"
-                                    required>
-                            </mat-form-field>
-                        </p>
-                        <p>
-                            <mat-form-field>
-                                <input formControlName="fechaNa" matInput placeholder="Fecha de nacimiento" required>
+                                <input formControlName="institucion" matInput placeholder="Institución" required>
                             </mat-form-field>
                         </p>
                         <p>
                             <mat-form-field>
                                 <mat-label>Tipo de sangre</mat-label>
-                                <mat-select formControlName="tipoSangre">
+                                <mat-select formControlName="blood_type">
                                     <mat-option value="A">A</mat-option>
                                     <mat-option value="B">B</mat-option>
                                     <mat-option value="AB">AB</mat-option>
@@ -62,12 +50,12 @@
                         </p>
                         <p>
                             <mat-form-field>
-                                <input formControlName="enfermedades" matInput placeholder="Enfermedades" required>
+                                <input formControlName="sicknessess" matInput placeholder="Enfermedades" required>
                             </mat-form-field>
                         </p>
                         <p>
                             <mat-form-field>
-                                <input formControlName="alergias" matInput placeholder="Alergias a medicamentos"
+                                <input formControlName="allergics" matInput placeholder="Alergias a medicamentos"
                                     required>
                             </mat-form-field>
                         </p>
@@ -88,9 +76,6 @@
                         <tr>
                             <th scope="col">No. Afiliación</th>
                             <th scope="col">Nombre</th>
-                            <th scope="col">Apellido Paterno</th>
-                            <th scope="col">Apellido Materno</th>
-                            <th scope="col">Fecha de nacimiento</th>
                             <th scope="col">Tipo de sangre</th>
                             <th scope="col">Enfermedades</th>
                             <th scope="col">Alergias</th>
@@ -99,14 +84,11 @@
 
                     <tbody>
                         <tr class="list-group-item-action" *ngFor="let teacher of teachers">
-                            <th scope="row">{{teacher.noAfiliacion}}</th>
-                            <td>{{teacher.nombre}}</td>
-                            <td>{{teacher.aPaterno}}</td>
-                            <td>{{teacher.aMaterno}}</td>
-                            <td>{{teacher.fechaNa}}</td>
-                            <td>{{teacher.tipoSangre}}</td>
-                            <td>{{teacher.enfermedades}}</td>
-                            <td>{{teacher.alergias}}</td>
+                            <th scope="row">{{teacher.n_afiliacion}}</th>
+                            <td>{{teacher.name}}</td>
+                            <td>{{teacher.blood_type}}</td>
+                            <td>{{teacher.sicknessess}}</td>
+                            <td>{{teacher.allergics}}</td>
                         </tr>
                     </tbody>
                 </table>
