@@ -6,4 +6,5 @@ export class Teacher {
     institucion: String;
     n_afiliacion: String;
     sicknessess: String;
+    name : String;
 }
