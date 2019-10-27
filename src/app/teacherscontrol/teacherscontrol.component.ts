@@ -23,6 +23,7 @@ export class TeacherscontrolComponent implements OnInit {
     this.navBarService.isAdmin();
     this.updateTable();
     let teacherControlBuilder = {
+      curp: ['', Validators.required],
       noAfiliacion: ['', Validators.required],
       nombre: ['', Validators.required],
       aPaterno: ['', Validators.required],
@@ -71,7 +72,7 @@ export class TeacherscontrolComponent implements OnInit {
     } else{
       this.teacherService.addTeacher(newTeacher).subscribe(
         data  => {
-        console.log("POST Request is successful ", data);
+        
         this.updateTable();
         this.clear();
         },

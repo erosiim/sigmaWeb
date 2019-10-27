@@ -16,6 +16,11 @@
                         </p>
                         <p>
                             <mat-form-field>
+                                <input formControlName="curp" matInput placeholder="Curp" required>
+                            </mat-form-field>
+                        </p>
+                        <p>
+                            <mat-form-field>
                                 <input formControlName="nombre" matInput placeholder="Nombre(s)" required>
                             </mat-form-field>
                         </p>
@@ -69,7 +74,7 @@
 
                         <p>
                             <button  type="button" (click)="saveOrEdit()"
-                                class="btn btn-success">Save</button>
+                                class="btn btn-success">Guardar cambio</button>
                             <button type="button" (click)="clear()" class="btn btn-outline-info ml-2">Clear</button>
                         </p>
                     </form>
